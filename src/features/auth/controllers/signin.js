@@ -10,8 +10,11 @@ const {
 
 class SignIn {
   async read(req, res) {
-    const { username, password } = req.body;
-    const existingUser = await authService.getAuthUserByUsername(username);
+    const { username, email, password } = req.body;
+    const existingUser = await authService.getUserByUsernameOrEmail(
+      username,
+      email
+    );
     if (!existingUser) {
       throw new BadRequestError("Invalid Credentials");
     }

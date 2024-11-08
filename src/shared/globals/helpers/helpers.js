@@ -1,6 +1,9 @@
 class Helpers {
   firstLetterUppercase(str) {
-    const valueString = str.toLowerCase();
+    if (typeof str !== "string") {
+      throw new TypeError("Expected a string");
+    }
+    const valueString = str?.toLowerCase();
     return valueString
       .split(" ")
       .map(
@@ -10,7 +13,7 @@ class Helpers {
       .join(" ");
   }
   lowerCase(str) {
-    return str.toLowerCase();
+    return str?.toLowerCase();
   }
   generateRandomIntegers(integerLength) {
     const characters = "0123456789";
@@ -111,4 +114,5 @@ class Helpers {
     return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
   }
 }
-module.exports = Helpers;
+const helpers = new Helpers();
+module.exports = helpers;

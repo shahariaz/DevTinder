@@ -20,29 +20,29 @@ class Application {
   #handleExit() {
     process.on("uncaughtException", (error) => {
       log.error(`There was an uncaught error: ${error}`);
-      Application.shutDownProperly(1);
+      this.shutDownProperly(1);
     });
 
     process.on("unhandleRejection", (reason) => {
       log.error(`Unhandled rejection at promise: ${reason}`);
-      Application.shutDownProperly(2);
+      this.shutDownProperly(2);
     });
 
     process.on("SIGTERM", () => {
       log.error("Caught SIGTERM");
-      Application.shutDownProperly(2);
+      this.shutDownProperly(2);
     });
 
     process.on("SIGINT", () => {
       log.error("Caught SIGINT");
-      Application.shutDownProperly(2);
+      this.shutDownProperly(2);
     });
 
     process.on("exit", () => {
       log.error("Exiting");
     });
   }
-  #shutDownProperly(exitCode) {
+  shutDownProperly(exitCode) {
     Promise.resolve()
       .then(() => {
         log.info("Shutting down");
